@@ -1,89 +1,39 @@
-// Define variables
-let gamePin = "";
-let botCount = 0;
-let isCooldown = false;
-let cooldownTime = 600000; // 10 minutes in milliseconds
-let nextUseTime = 0;
-
-// Get DOM elements
-const gamePinInput = document.getElementById("game-pin-input");
-const botCountInput = document.getElementById("bot-count-input");
+// Get elements from the HTML document
+const botForm = document.getElementById("bot-form");
+const botInput = document.getElementById("bot-input");
+const botSubmit = document.getElementById("bot-submit");
 const errorMessage = document.getElementById("error-message");
 const successMessage = document.getElementById("success-message");
-const submitButton = document.getElementById("submit-button");
 
-// Function to check if game pin is valid
-async function checkGamePin(pin) {
-  // Use kahoot.js API to check if game pin is valid
-  const kahootClient = new Kahoot();
-  try {
-    await kahootClient.join(pin, "Bot");
-    kahootClient.leave();
-    return true;
-  } catch (error) {
-    return false;
-  }
-}
-
-// Function to send bots to lobby
-async function sendBots(pin, count) {
-  // Use kahoot.js API to send bots to lobby
-  for (let i = 0; i < count; i++) {
-    const kahootClient = new Kahoot();
-    try {
-      await kahootClient.join(pin, `Bot ${i+1}`);
-    } catch (error) {
-      console.error(`Error joining bot ${i+1}: ${error}`);
-    }
-  }
-}
-
-// Function to handle submit button click
-async function handleSubmit(event) {
+// Add event listener to the form submission
+botForm.addEventListener("submit", (event) => {
   event.preventDefault();
+  
+  // Get the game pin and bot count from the form input
+  const gamePin = window.location.search.substr(1);
+  const botCount = parseInt(botInput.value);
 
-  // Get game pin and bot count inputs
-  gamePin = gamePinInput.value;
-  botCount = botCountInput.value;
-
-  // Check if game pin is valid
-  if (!await checkGamePin(gamePin)) {
-    // Display error message
-    errorMessage.innerHTML = "Invalid game pin.";
-    successMessage.innerHTML = "";
+  // Validate the bot count
+  if (botCount < 1 || botCount > 50 || isNaN(botCount)) {
+    errorMessage.textContent = "Invalid amount. Must be between 1 and 50.";
+    successMessage.textContent = "";
     return;
   }
-
-  // Check if bot count is valid
-  if (botCount < 1 || botCount > 50) {
-    // Display error message
-    errorMessage.innerHTML = "Bot count must be between 1 and 50.";
-    successMessage.innerHTML = "";
-    return;
+  
+  // Send the bots to the game
+  errorMessage.textContent = "";
+  successMessage.textContent = `Sending ${botCount} bots to game pin ${gamePin}...`;
+  const kahootClient = new Kahoot();
+  for (let i = 0; i < botCount; i++) {
+    kahootClient.join(gamePin, `Bot ${i + 1}`);
   }
 
-  // Check if cooldown is active
-  if (isCooldown) {
-    // Calculate time remaining in cooldown
-    let timeRemaining = nextUseTime - Date.now();
-
-    // Display error message
-    errorMessage.innerHTML = `You must wait ${Math.ceil(timeRemaining / 60000)} minutes before using again.`;
-    successMessage.innerHTML = "";
-    return;
-  }
-
-  // Send bots to lobby
-  await sendBots(gamePin, botCount);
-
-  // Set cooldown
-  isCooldown = true;
-  nextUseTime = Date.now() + cooldownTime;
-
-  // Display success message
-  successMessage.innerHTML = `Sending ${botCount} bots to ${gamePin} lobby.`;
-  errorMessage.innerHTML = "";
-}
-
-// Attach event listener to submit button
-submitButton.addEventListener("click", handleSubmit);
+  // Disable the form for 10 minutes
+  botInput.disabled = true;
+  botSubmit.disabled = true;
+  setTimeout(() => {
+    botInput.disabled = false;
+    botSubmit.disabled = false;
+    successMessage.textContent = "";
+  }, 600000);
+});
