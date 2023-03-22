@@ -1,37 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Kahoot Bot</title>
-  <link rel="stylesheet" type="text/css" href="styles.css">
-  <script src="https://cdn.jsdelivr.net/npm/kahoot.js-updated/dist/kahoot.js"></script>
-</head>
-<body>
-  <div class="container">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kahoot Bot</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
     <div class="header">
-      <img src="https://cdn.kahoot.it/dist/brand/assets/images/kahoot-logo-white-horizontal.png">
+      <h1 class="logo">Kahoot Bot</h1>
     </div>
     <div class="content">
-      <div class="game-pin">
-        <h2>Enter Game PIN</h2>
-        <form id="game-pin-form">
-          <input type="text" id="game-pin-input" placeholder="Enter game PIN">
-          <button type="submit" id="game-pin-submit">Enter</button>
-        </form>
-        <div id="game-pin-error" class="error-message"></div>
-      </div>
-      <div class="bot-count hidden">
-        <h2>Enter Bot Count</h2>
-        <form id="bot-count-form">
-          <input type="number" id="bot-count-input" placeholder="Enter bot count" min="1" max="50">
-          <button type="submit" id="bot-count-submit">Send Bots</button>
-        </form>
-        <div id="bot-count-success" class="success-message"></div>
-        <div id="bot-count-error" class="error-message"></div>
-      </div>
+      <form id="game-pin-form" class="game-pin-form">
+        <h2>Enter game PIN:</h2>
+        <input type="text" id="game-pin-input" class="game-pin-input" placeholder="Enter game PIN">
+        <div class="error-message" id="error-message"></div>
+        <button type="submit" class="enter-button" id="enter-button">Enter</button>
+      </form>
+      <form id="bot-count-form" class="bot-count-form hidden">
+        <h2>Enter number of bots:</h2>
+        <input type="number" id="bot-count-input" class="bot-count-input" min="1" max="50" placeholder="Enter number of bots">
+        <div class="error-message" id="error-message"></div>
+        <button type="submit" class="enter-button" id="enter-button">Send bots</button>
+      </form>
+      <div class="success-message hidden" id="success-message"></div>
     </div>
-  </div>
-
-  <script src="main.js"></script>
-</body>
+    <script src="kahoot.js"></script>
+    <script src="main.js"></script>
+  </body>
 </html>
