@@ -1,45 +1,63 @@
-/* Styles for game pin input */
-#game-pin-input {
-  font-size: 24px;
+body {
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  margin: 50px auto;
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.form-group input {
+  display: block;
+  width: 100%;
   padding: 10px;
+  font-size: 18px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  border: 2px solid #ddd;
 }
 
-/* Styles for bot count input */
-#bot-count-input {
-  font-size: 24px;
+.btn {
+  display: block;
+  width: 100%;
   padding: 10px;
-  border-radius: 5px;
-  border: 2px solid #ddd;
-}
-
-/* Styles for error message */
-#error-message {
-  font-size: 20px;
-  color: red;
-}
-
-/* Styles for success message */
-#success-message {
-  font-size: 20px;
-  color: green;
-}
-
-/* Styles for submit button */
-#submit-button {
-  font-size: 24px;
-  padding: 10px 20px;
-  border-radius: 5px;
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
   border: none;
-  background-color: #007bff;
-  color: white;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-/* Styles for page container */
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
+.btn:hover {
+  background-color: #3e8e41;
+}
+
+.error {
+  color: #f44336;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.success {
+  color: #4caf50;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
