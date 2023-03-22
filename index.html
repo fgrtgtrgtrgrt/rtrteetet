@@ -8,6 +8,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/kahoot.js-updated/dist/kahoot.js"></script>
 </head>
 <body>
 
@@ -39,52 +40,58 @@
 
 	<script>
 		$(document).ready(function() {
-			$('#game-pin-form').submit(function(event) {
-				event.preventDefault();
-				var gamePin = $('#game-pin-input').val();
-				if (gamePin === '1234') { // replace with your own game pin validation logic
-					$('#invalid-game-pin-message').hide();
-					$('#game-pin-form').html(`
-						<div class="card-header bg-primary text-white">Enter Amount of Bots</div>
-						<div class="card-body">
-							<form id="bots-form" action="javascript:void(0);">
-								<div class="form-group">
-									<label for="bots-input">Amount of Bots:</label>
-									<input type="number" class="form-control" id="bots-input" name="bots" min="1" max="50" required>
-								</div>
-								<div class="form-group">
-									<button type="submit" class="btn btn-primary">Submit</button>
-								</div>
-							</form>
-						</div>
-						<div class="card-footer">
-							<div class="alert alert-danger" role="alert" style="display: none;" id="invalid-bots-message">
-								Invalid number of bots!
+	$('#game-pin-form').submit(function(event) {
+		event.preventDefault();
+		var gamePin = $('#game-pin-input').val();
+		var reserveUrl = 'https://play.kahoot.it/reserve/session/' + gamePin;
+		
+		$.get(reserveUrl, function(data, status) {
+			if (status == 'success') {
+				$('#invalid-game-pin-message').hide();
+				$('#game-pin-form').html(`
+					<div class="card-header bg-primary text-white">Enter Amount of Bots</div>
+					<div class="card-body">
+						<form id="bots-form" action="javascript:void(0);">
+							<div class="form-group">
+								<label for="bots-input">Amount of Bots:</label>
+								<input type="number" class="form-control" id="bots-input" name="bots" min="1" max="50" required>
 							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
+						</form>
+					</div>
+					<div class="card-footer">
+						<div class="alert alert-danger" role="alert" style="display: none;" id="invalid-bots-message">
+							Invalid number of bots!
 						</div>
-					`);
+					</div>
+				`);
+				$('#bots-form').submit(function(event) {
+    event.preventDefault();
+    var bots = $('#bots-input').val();
+    if (bots >= 1 && bots <= 50) {
+        $('#invalid-bots-message').hide();
+        var kahootClient = new Kahoot();
+        var gamePin = getUrlVars()["game-pin"];
+        var name = "Bot";
+        var maxDelay = 1000;
+        var delay = 0;
+        var successMessage = "Sent " + bots + " bots to the " + gamePin + " lobby";
 
-					$('#bots-form').submit(function(event) {
-						event.preventDefault();
-						var bots = $('#bots-input').val();
-						if (bots >= 1 && bots <= 50) { // replace with your own bots validation logic
-							$('#invalid-bots-message').hide();
-							window.location.href = 'bots.html?game-pin=' + gamePin + '&bots=' + bots;
-						} else {
-							$('#invalid-bots-message').show();
-						}
-					});
-				} else {
-					$('#invalid-game-pin-message').show();
-				}
-			});
-		});
-	</script>
+        for (var i = 0; i < bots; i++) {
+            setTimeout(function() {
+                kahootClient.join(gamePin, name + " " + Math.floor(Math.random() * 10000));
+            }, delay);
+            delay += Math.floor(Math.random() * maxDelay) + 100;
+        }
+
+        $('#bots-form').html(`
+            <div class="alert alert-success" role="alert">${successMessage}</div>
+        `);
+    } else {
+        $('#invalid-bots-message').show();
+    }
+});
 </body>
-</html>
-
-
-
-
-
-
+    </html>
