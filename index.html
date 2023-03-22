@@ -1,28 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html>
+  <head>
+    <meta charset="utf-8">
     <title>Kahoot Botter</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-</head>
-<body>
-    <div class="title">Kahoot Botter</div>
-    <div class="content">
-        <div class="join-container">
-            <div class="join-box">
-                <form name="gameForm" onsubmit="return validateForm()">
-                    <div class="join-box-top"></div>
-                    <div class="join-box-content">
-                        <div class="kahoot-logo"></div>
-                        <h1>Join a Game</h1>
-                        <input type="text" id="gamePin" name="gamePin" placeholder="Enter Game PIN">
-                        <button type="submit">Enter</button>
-                    </div>
-                    <div class="join-box-bottom"></div>
-                </form>
-            </div>
-        </div>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div id="pin-page" class="page">
+      <h1>Kahoot Botter</h1>
+      <input type="text" id="game-pin" placeholder="Enter Game PIN">
+      <button id="submit-pin">Enter</button>
+      <div id="pin-error"></div>
     </div>
-    <script src="bot.js"></script>
-</body>
+    <div id="bot-page" class="page hidden">
+      <h1>Kahoot Botter</h1>
+      <div id="game-info"></div>
+      <input type="number" id="bot-count" placeholder="Enter number of bots (1-50)">
+      <button id="submit-bots">Send Bots</button>
+      <div id="bot-error"></div>
+      <div id="bot-success"></div>
+    </div>
+    <script src="kahoot.js"></script>
+    <script src="main.js"></script>
+  </body>
 </html>
