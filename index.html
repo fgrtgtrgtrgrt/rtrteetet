@@ -1,31 +1,90 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kahoot Bot</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
-    <div class="header">
-      <h1 class="logo">Kahoot Bot</h1>
-    </div>
-    <div class="content">
-      <form id="game-pin-form" class="game-pin-form">
-        <h2>Enter game PIN:</h2>
-        <input type="text" id="game-pin-input" class="game-pin-input" placeholder="Enter game PIN">
-        <div class="error-message" id="error-message"></div>
-        <button type="submit" class="enter-button" id="enter-button">Enter</button>
-      </form>
-      <form id="bot-count-form" class="bot-count-form hidden">
-        <h2>Enter number of bots:</h2>
-        <input type="number" id="bot-count-input" class="bot-count-input" min="1" max="50" placeholder="Enter number of bots">
-        <div class="error-message" id="error-message"></div>
-        <button type="submit" class="enter-button" id="enter-button">Send bots</button>
-      </form>
-      <div class="success-message hidden" id="success-message"></div>
-    </div>
-    <script src="kahoot.js"></script>
-    <script src="main.js"></script>
-  </body>
+<head>
+	<title>Game Pin Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header bg-primary text-white">Enter Game Pin</div>
+					<div class="card-body">
+						<form id="game-pin-form" action="javascript:void(0);">
+							<div class="form-group">
+								<label for="game-pin-input">Game Pin:</label>
+								<input type="text" class="form-control" id="game-pin-input" name="game-pin" required>
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</div>
+						</form>
+					</div>
+					<div class="card-footer">
+						<div class="alert alert-danger" role="alert" style="display: none;" id="invalid-game-pin-message">
+							Invalid game pin!
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function() {
+			$('#game-pin-form').submit(function(event) {
+				event.preventDefault();
+				var gamePin = $('#game-pin-input').val();
+				if (gamePin === '1234') { // replace with your own game pin validation logic
+					$('#invalid-game-pin-message').hide();
+					$('#game-pin-form').html(`
+						<div class="card-header bg-primary text-white">Enter Amount of Bots</div>
+						<div class="card-body">
+							<form id="bots-form" action="javascript:void(0);">
+								<div class="form-group">
+									<label for="bots-input">Amount of Bots:</label>
+									<input type="number" class="form-control" id="bots-input" name="bots" min="1" max="50" required>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-primary">Submit</button>
+								</div>
+							</form>
+						</div>
+						<div class="card-footer">
+							<div class="alert alert-danger" role="alert" style="display: none;" id="invalid-bots-message">
+								Invalid number of bots!
+							</div>
+						</div>
+					`);
+
+					$('#bots-form').submit(function(event) {
+						event.preventDefault();
+						var bots = $('#bots-input').val();
+						if (bots >= 1 && bots <= 50) { // replace with your own bots validation logic
+							$('#invalid-bots-message').hide();
+							window.location.href = 'bots.html?game-pin=' + gamePin + '&bots=' + bots;
+						} else {
+							$('#invalid-bots-message').show();
+						}
+					});
+				} else {
+					$('#invalid-game-pin-message').show();
+				}
+			});
+		});
+	</script>
+</body>
 </html>
+
+
+
+
+
+
