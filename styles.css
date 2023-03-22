@@ -1,138 +1,45 @@
-body {
-    margin: 0;
-    font-family: 'Open Sans', sans-serif;
-    background-color: #ec4561;
-  }
-  
-  .header {
-    background-color: #fff;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .logo {
-    font-size: 24px;
-    font-weight: 600;
-    color: #333;
-  }
-  
-  .container {
-    max-width: 800px;
-    margin: 80px auto;
-    background-color: #fff;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  .input-container {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .input-label {
-    font-weight: 600;
-    margin-right: 10px;
-    width: 150px;
-  }
-  
-  .input-field {
-    flex: 1;
-    height: 40px;
-    border-radius: 5px;
-    border: none;
-    padding: 10px;
-    font-size: 16px;
-  }
-  
-  .input-field:focus {
-    outline: none;
-  }
-  
-  .btn-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-  
-  .btn {
-    background-color: #ec4561;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  .btn:hover {
-    background-color: #ff6a85;
-  }
-  
-  .message-container {
-    margin-top: 20px;
-  }
-  
-  .bot-message {
-    background-color: #f2f2f2;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
-  .user-message {
-    background-color: #ec4561;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
-  
-  .typing-indicator {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .dot {
-    background-color: #ec4561;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 5px;
-    animation: pulse 1s ease-in-out infinite;
-  }
-  
-  .dot:nth-child(2) {
-    animation-delay: 0.1s;
-  }
-  
-  .dot:nth-child(3) {
-    animation-delay: 0.2s;
-  }
-  
-  @keyframes pulse {
-    0% {
-      transform: scale(0);
-      opacity: 0.7;
-    }
-    50% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    100% {
-      transform: scale(0);
-      opacity: 0.7;
-    }
-  }
-  
+/* Styles for game pin input */
+#game-pin-input {
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #ddd;
+}
+
+/* Styles for bot count input */
+#bot-count-input {
+  font-size: 24px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #ddd;
+}
+
+/* Styles for error message */
+#error-message {
+  font-size: 20px;
+  color: red;
+}
+
+/* Styles for success message */
+#success-message {
+  font-size: 20px;
+  color: green;
+}
+
+/* Styles for submit button */
+#submit-button {
+  font-size: 24px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+/* Styles for page container */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
