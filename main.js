@@ -13,19 +13,33 @@ const successMessage = document.getElementById("success-message");
 const submitButton = document.getElementById("submit-button");
 
 // Function to check if game pin is valid
-function checkGamePin(pin) {
+async function checkGamePin(pin) {
   // Use kahoot.js API to check if game pin is valid
-  // Return true if valid, false otherwise
+  const kahootClient = new Kahoot();
+  try {
+    await kahootClient.join(pin, "Bot");
+    kahootClient.leave();
+    return true;
+  } catch (error) {
+    return false;
+  }
 }
 
 // Function to send bots to lobby
-function sendBots(pin, count) {
+async function sendBots(pin, count) {
   // Use kahoot.js API to send bots to lobby
-  // Display success message
+  for (let i = 0; i < count; i++) {
+    const kahootClient = new Kahoot();
+    try {
+      await kahootClient.join(pin, `Bot ${i+1}`);
+    } catch (error) {
+      console.error(`Error joining bot ${i+1}: ${error}`);
+    }
+  }
 }
 
 // Function to handle submit button click
-function handleSubmit(event) {
+async function handleSubmit(event) {
   event.preventDefault();
 
   // Get game pin and bot count inputs
@@ -33,7 +47,7 @@ function handleSubmit(event) {
   botCount = botCountInput.value;
 
   // Check if game pin is valid
-  if (!checkGamePin(gamePin)) {
+  if (!await checkGamePin(gamePin)) {
     // Display error message
     errorMessage.innerHTML = "Invalid game pin.";
     successMessage.innerHTML = "";
@@ -60,7 +74,7 @@ function handleSubmit(event) {
   }
 
   // Send bots to lobby
-  sendBots(gamePin, botCount);
+  await sendBots(gamePin, botCount);
 
   // Set cooldown
   isCooldown = true;
