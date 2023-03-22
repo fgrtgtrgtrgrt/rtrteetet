@@ -1,63 +1,120 @@
-body {
-  font-family: Arial, sans-serif;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Segoe UI", sans-serif;
+  color: #565656;
+  font-size: 16px;
 }
 
 .container {
-  margin: 50px auto;
-  max-width: 400px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-  font-size: 18px;
+.title {
+  font-size: 2rem;
   font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-.form-group input {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  font-size: 18px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.input-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 
-.btn {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  background-color: #4caf50;
-  color: #fff;
-  font-size: 18px;
+.input-label {
   font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.input {
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.submit-button {
   border: none;
-  border-radius: 5px;
+  background-color: #05bea6;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
-.btn:hover {
-  background-color: #3e8e41;
+.submit-button:hover {
+  background-color: #049e8a;
 }
 
-.error {
-  color: #f44336;
-  font-size: 18px;
+.error-message {
+  color: #ff5a5a;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
 }
 
-.success {
-  color: #4caf50;
-  font-size: 18px;
+.success-message {
+  color: #05bea6;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 1rem;
+}
+/* Game pin page specific styles */
+.pin-page .title {
+  margin-top: 2rem;
+}
+
+.pin-page .input-field {
+  width: 70%;
+}
+
+.pin-page .input-label {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.pin-page .input {
+  font-size: 1.2rem;
+  height: 3rem;
+}
+
+.pin-page .submit-button {
+  margin-top: 2rem;
+  width: 50%;
+}
+
+/* Bots page specific styles */
+.bots-page .title {
+  margin-top: 3rem;
+}
+
+.bots-page .input-field {
+  width: 40%;
+}
+
+.bots-page .input-label {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.bots-page .input {
+  font-size: 1.5rem;
+  height: 4rem;
+}
+
+.bots-page .submit-button {
+  margin-top: 2rem;
+  width: 50%;
+}
+
+.bots-page .error-message {
+  margin-top: 1rem;
 }
