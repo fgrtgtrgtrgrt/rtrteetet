@@ -1,26 +1,37 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Kahoot Botter</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-  </head>
-  <body>
-    <div id="pin-page" class="page">
-      <h1>Kahoot Botter</h1>
-      <input type="text" id="game-pin" placeholder="Enter Game PIN">
-      <button id="submit-pin">Enter</button>
-      <div id="pin-error"></div>
+<head>
+  <meta charset="UTF-8">
+  <title>Kahoot Bot</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/kahoot.js-updated/dist/kahoot.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://cdn.kahoot.it/dist/brand/assets/images/kahoot-logo-white-horizontal.png">
     </div>
-    <div id="bot-page" class="page hidden">
-      <h1>Kahoot Botter</h1>
-      <div id="game-info"></div>
-      <input type="number" id="bot-count" placeholder="Enter number of bots (1-50)">
-      <button id="submit-bots">Send Bots</button>
-      <div id="bot-error"></div>
-      <div id="bot-success"></div>
+    <div class="content">
+      <div class="game-pin">
+        <h2>Enter Game PIN</h2>
+        <form id="game-pin-form">
+          <input type="text" id="game-pin-input" placeholder="Enter game PIN">
+          <button type="submit" id="game-pin-submit">Enter</button>
+        </form>
+        <div id="game-pin-error" class="error-message"></div>
+      </div>
+      <div class="bot-count hidden">
+        <h2>Enter Bot Count</h2>
+        <form id="bot-count-form">
+          <input type="number" id="bot-count-input" placeholder="Enter bot count" min="1" max="50">
+          <button type="submit" id="bot-count-submit">Send Bots</button>
+        </form>
+        <div id="bot-count-success" class="success-message"></div>
+        <div id="bot-count-error" class="error-message"></div>
+      </div>
     </div>
-    <script src="https://unpkg.com/kahoot.js-updated/dist/kahoot.js"></script>
-    <script src="main.js"></script>
-  </body>
+  </div>
+
+  <script src="main.js"></script>
+</body>
 </html>
