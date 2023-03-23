@@ -12,50 +12,50 @@
 
     
 
-	<script>
-	  $(document).ready(function() {
-	    $('#game-pin-form').submit(function(event) {
-	      event.preventDefault();
-	      var gamePin = $('#game-pin-input').val();
-	      var reserveUrl = 'https://play.kahoot.it/reserve/session/' + gamePin;
+<script>
+  $(document).ready(function() {
+    $('#game-pin-form').submit(function(event) {
+      event.preventDefault();
+      var gamePin = $('#game-pin-input').val();
+      var reserveUrl = 'https://play.kahoot.it/reserve/session/' + gamePin;
 		
-	      $.get(reserveUrl, function(data, status) {
-	        if (status == 'success') {
-	          $('#invalid-game-pin-message').hide();
-	          $('#game-pin-form').html(`
-							<div class="card-header bg-primary text-white">Enter Amount of Bots</div>
-							<div class="card-body">
-								<form id="bots-form" action="javascript:void(0);">
-									<div class="form-group">
-										<label for="bots-input">Amount of Bots:</label>
-										<input type="number" class="form-control" id="bots-input" name="bots" min="1" max="50" required>
-									</div>
-									<div class="form-group">
-										<button type="submit" class="btn btn-primary">Submit</button>
-									</div>
-								</form>
-							</div>
-							<div class="card-footer">
-								<div class="alert alert-danger" role="alert" style="display: none;" id="invalid-bots-message">
-									Invalid number of bots!
-								</div>
-							</div>
-						`);
-	          
-	          fetch("https://Kahoot.fgrtgtrgtrgrt.repl.co/api", {
-	            method: "POST",
-	            body: JSON.stringify({ gamePin }),
-	          })
-	            .then((response) => response.json())
-	            .then((data) => console.log(data))
-	            .catch((error) => console.error(error));
-	        } else {
-	          $('#invalid-game-pin-message').show();
-	        }
-	      });
-	    });
-	  });
-	</script>
+      $.get(reserveUrl, function(data, status) {
+        if (status == 'success') {
+          $('#invalid-game-pin-message').hide();
+          $('#game-pin-form').html(`
+            <div class="card-header bg-primary text-white">Enter Amount of Bots</div>
+            <div class="card-body">
+              <form id="bots-form" action="javascript:void(0);">
+                <div class="form-group">
+                  <label for="bots-input">Amount of Bots:</label>
+                  <input type="number" class="form-control" id="bots-input" name="bots" min="1" max="50" required>
+                </div>
+                <div class="form-group">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer">
+              <div class="alert alert-danger" role="alert" style="display: none;" id="invalid-bots-message">
+                Invalid number of bots!
+              </div>
+            </div>
+          `);
+
+          fetch("https://Kahoot.fgrtgtrgtrgrt.repl.co/api", {
+            method: "POST",
+            body: JSON.stringify({ gamePin }),
+          })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.error(error));
+        } else {
+          $('#invalid-game-pin-message').show();
+        }
+      });
+    });
+  });
+</script>
 </head>
 <body>
 
