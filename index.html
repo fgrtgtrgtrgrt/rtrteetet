@@ -10,19 +10,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script>
 
-    $('#bots-form').submit(function(event) {
-      event.preventDefault();
-      var numBots = $('#bots-input').val();
-
-      if (numBots < 1 || numBots > 50) {
-        $('#invalid-bots-message').show();
-      } else {
-        $('#invalid-bots-message').hide();
-        $('#game-pin-form').submit();
-      }
-    });
-  });
-</script>
+    
 
 	<script>
 	  $(document).ready(function() {
@@ -82,6 +70,8 @@
 								<label for="game-pin-input">Game Pin:</label>
 								<input type="text" class="form-control" id="game-pin-input" name="game-pin" required>
 							</div>
+							<div class="form-group">
+										<button type="submit" class="btn btn-primary">Submit</button>
 						</form>
 						<div class="alert alert-danger" role="alert" style="display: none;" id="invalid-game-pin-message">
 							Invalid game pin!
